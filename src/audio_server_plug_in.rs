@@ -430,7 +430,13 @@
 // };
 
 const fn four_cc(cc: &[u8; 4]) -> u32 {
-    unsafe { *(cc.as_ptr() as *const u32) }
+    let v = unsafe { *(cc.as_ptr() as *const u32) };
+    // #[cfg(target_endian="little")] {
+        v
+    // }
+    // #[cfg(target_endian="big")] {
+    //     v.to_be()
+    // }
 }
 #[repr(u32)]
 #[derive(Clone, Copy, PartialEq, Eq)]

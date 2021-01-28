@@ -352,6 +352,21 @@
 //     kAudioServerPlugInIOOperationWriteMix       = 'rite'
 // };
 
+// #[repr(i32)]
+// #[derive(Clone, Copy, PartialEq, Eq)]
+// enum AudioServerPlugInIOOperation {
+//     Thread         = 'thrd',
+//     Cycle          = 'cycl',
+//     ReadInput      = 'read',
+//     ConvertInput   = 'cinp',
+//     ProcessInput   = 'pinp',
+//     ProcessOutput  = 'pout',
+//     MixOutput      = 'mixo',
+//     ProcessMix     = 'pmix',
+//     ConvertMix     = 'cmix',
+//     WriteMix       = 'rite'
+// }
+
 // //==================================================================================================
 // #pragma mark -
 // #pragma mark AudioObject Properties
@@ -414,6 +429,18 @@
 //     kAudioDeviceClockAlgorithm12PtMovingWindowAverage   = 'mavg'
 // };
 
+const fn four_cc(cc: &[u8; 4]) -> u32 {
+    unsafe { *(cc.as_ptr() as *const u32) }
+}
+#[repr(u32)]
+#[derive(Clone, Copy, PartialEq, Eq)]
+pub enum AudioDeviceClockAlgorithmSelector {
+    Raw = four_cc(b"raww"),
+    // Raw                       = 'raww',
+    // SimpleIIR                 = 'iirf',
+    // 12PtMovingWindowAverage   = 'mavg'
+}
+
 // //==================================================================================================
 // #pragma mark Device Properties
 
@@ -457,6 +484,7 @@
 // */
 // struct  AudioServerPlugInHostInterface
 // {
+pub struct AudioServerPlugInHostInterface {
 
 // #pragma mark Property Operations
 
@@ -581,6 +609,7 @@
 //                                             UInt64                      inChangeAction,
 //                                             void* __nullable            inChangeInfo);
 // };
+}
 
 // //==================================================================================================
 // #pragma mark -

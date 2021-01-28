@@ -172,7 +172,7 @@ pub type AudioObjectPropertyListenerProc =
 // typedef void
 // (^AudioObjectPropertyListenerBlock)(    UInt32                              inNumberAddresses,
 //                                         const AudioObjectPropertyAddress*   inAddresses);
-
+pub type AudioObjectPropertyListenerBlock = block::RcBlock<(u32, *const AudioObjectPropertyAddress), ()>;
 // //==================================================================================================
 // #pragma mark AudioObject Properties
 
@@ -202,6 +202,12 @@ pub type AudioObjectPropertyListenerProc =
 //     kAudioObjectPropertyListenerRemoved     = 'lisr'
 // };
 
+impl AudioObjectPropertySelector {
+    pub const Creator: Self             = Self::new(b"oplg");
+    pub const ListenerAdded: Self       = Self::new(b"lisa");
+    pub const ListenerRemoved: Self     = Self::new(b"lisr");
+}
+
 // //==================================================================================================
 // #pragma mark AudioObject Functions
 
@@ -216,6 +222,9 @@ pub type AudioObjectPropertyListenerProc =
 // */
 // extern void
 // AudioObjectShow(    AudioObjectID   inObjectID)                                                     __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
+extern "C" {
+    pub fn AudioObjectShow(object_id: AudioObjectID);
+}
 
 // /*!
 //     @function       AudioObjectHasProperty
@@ -643,16 +652,7 @@ extern "C" {
 //     kAudioHardwarePropertyPowerHint                             = 'powh'
 // };
 
-// pub struct SS(u32);
-// impl SS {
 
-// }
-
-impl AudioObjectPropertySelector {
-    pub const fn new(cc: &[u8; 4]) -> Self {
-        Self(four_cc(cc))
-    }
-}
 
 impl AudioObjectPropertySelector {
     pub const Devices: Self = Self::new(b"dev#");

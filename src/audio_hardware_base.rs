@@ -73,6 +73,12 @@ pub struct AudioClassID(u32);
 #[derive(Clone, Copy, PartialEq, Eq)]
 pub struct AudioObjectPropertySelector(pub u32);
 
+impl AudioObjectPropertySelector {
+    pub const fn new(cc: &[u8; 4]) -> Self {
+        Self(four_cc(cc))
+    }
+}
+
 // /*!
 //     @typedef        AudioObjectPropertyScope
 //     @abstract       An AudioObjectPropertyScope is a four char code that identifies, along with the

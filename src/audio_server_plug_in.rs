@@ -1,3 +1,4 @@
+use crate::prelude::*;
 use cc4::four_cc;
 // /*==================================================================================================
 //      File:       CoreAudio/AudioServerPlugIn.h
@@ -483,127 +484,127 @@ pub enum AudioDeviceClockAlgorithmSelector {
 pub struct AudioServerPlugInHostInterface {
     // #pragma mark Property Operations
 
-//     /*!
-//         @method         PropertiesChanged
-//         @abstract       This method informs the Host when the state of an plug-in's object changes.
-//         @discussion     Note that for Device objects, this method is only used for state changes
-//                         that don't affect IO or the structure of the device.
-//         @param          inHost
-//                             The AudioServerPlugInHostRef passed to the plug-in at initialization.
-//         @param          inObjectID
-//                             The AudioObjectID of the object whose state has changed.
-//         @param          inNumberAddresses
-//                             The number of elements in the inAddresses array.
-//         @param          inAddresses
-//                             An array of AudioObjectPropertyAddresses for the changed properties.
-//         @result         An OSStatus indicating success or failure.
-//     */
-//     OSStatus
-//     (*PropertiesChanged)(   AudioServerPlugInHostRef            inHost,
-//                             AudioObjectID                       inObjectID,
-//                             UInt32                              inNumberAddresses,
-//                             const AudioObjectPropertyAddress*   inAddresses);
+    //     /*!
+    //         @method         PropertiesChanged
+    //         @abstract       This method informs the Host when the state of an plug-in's object changes.
+    //         @discussion     Note that for Device objects, this method is only used for state changes
+    //                         that don't affect IO or the structure of the device.
+    //         @param          inHost
+    //                             The AudioServerPlugInHostRef passed to the plug-in at initialization.
+    //         @param          inObjectID
+    //                             The AudioObjectID of the object whose state has changed.
+    //         @param          inNumberAddresses
+    //                             The number of elements in the inAddresses array.
+    //         @param          inAddresses
+    //                             An array of AudioObjectPropertyAddresses for the changed properties.
+    //         @result         An OSStatus indicating success or failure.
+    //     */
+    //     OSStatus
+    //     (*PropertiesChanged)(   AudioServerPlugInHostRef            inHost,
+    //                             AudioObjectID                       inObjectID,
+    //                             UInt32                              inNumberAddresses,
+    //                             const AudioObjectPropertyAddress*   inAddresses);
+    PropertiesChanged: fn(&Self, AudioObjectID, u32, *const AudioObjectPropertyAddress) -> OSStatus,
+    // #pragma mark Storage Operations
 
-// #pragma mark Storage Operations
+    //     /*!
+    //         @method         CopyFromStorage
+    //         @abstract       This method will fetch the data associated with the named storage key.
+    //         @param          inHost
+    //                             The AudioServerPlugInHostRef passed to the plug-in at initialization.
+    //         @param          inKey
+    //                             A CFStringRef that contains the name of the key whose data is to be
+    //                             fetched. Note that the Host will make sure that the keys for one plug-in
+    //                             do not collide with the keys for other plug-ins.
+    //         @param          outData
+    //                             The data associated with the named storage key in the form of
+    //                             CFPropertyList. The caller is responsible for releasing the returned
+    //                             CFObject.
+    //         @result         An OSStatus indicating success or failure.
+    //     */
+    //     OSStatus
+    //     (*CopyFromStorage)( AudioServerPlugInHostRef                    inHost,
+    //                         CFStringRef                                 inKey,
+    //                         CFPropertyListRef __nullable * __nonnull    outData);
 
-//     /*!
-//         @method         CopyFromStorage
-//         @abstract       This method will fetch the data associated with the named storage key.
-//         @param          inHost
-//                             The AudioServerPlugInHostRef passed to the plug-in at initialization.
-//         @param          inKey
-//                             A CFStringRef that contains the name of the key whose data is to be
-//                             fetched. Note that the Host will make sure that the keys for one plug-in
-//                             do not collide with the keys for other plug-ins.
-//         @param          outData
-//                             The data associated with the named storage key in the form of
-//                             CFPropertyList. The caller is responsible for releasing the returned
-//                             CFObject.
-//         @result         An OSStatus indicating success or failure.
-//     */
-//     OSStatus
-//     (*CopyFromStorage)( AudioServerPlugInHostRef                    inHost,
-//                         CFStringRef                                 inKey,
-//                         CFPropertyListRef __nullable * __nonnull    outData);
+    //     /*!
+    //         @method         WriteToStorage
+    //         @abstract       This method will associate the given data with the named storage key,
+    //                         replacing any existing data.
+    //         @discussion     Note that any data stored this way is persists beyond the life span of the
+    //                         Host including across rebooting.
+    //         @param          inHost
+    //                             The AudioServerPlugInHostRef passed to the plug-in at initialization.
+    //         @param          inKey
+    //                             A CFStringRef that contains the name of the key whose data is to be
+    //                             written. Note that the Host will make sure that the keys for one plug-in
+    //                             do not collide with the keys for other plug-ins.
+    //         @param          inData
+    //                             A CFPropertyListRef containing the data to associate with the key.
+    //         @result         An OSStatus indicating success or failure.
+    //     */
+    //     OSStatus
+    //     (*WriteToStorage)(  AudioServerPlugInHostRef    inHost,
+    //                         CFStringRef                 inKey,
+    //                         CFPropertyListRef           inData);
 
-//     /*!
-//         @method         WriteToStorage
-//         @abstract       This method will associate the given data with the named storage key,
-//                         replacing any existing data.
-//         @discussion     Note that any data stored this way is persists beyond the life span of the
-//                         Host including across rebooting.
-//         @param          inHost
-//                             The AudioServerPlugInHostRef passed to the plug-in at initialization.
-//         @param          inKey
-//                             A CFStringRef that contains the name of the key whose data is to be
-//                             written. Note that the Host will make sure that the keys for one plug-in
-//                             do not collide with the keys for other plug-ins.
-//         @param          inData
-//                             A CFPropertyListRef containing the data to associate with the key.
-//         @result         An OSStatus indicating success or failure.
-//     */
-//     OSStatus
-//     (*WriteToStorage)(  AudioServerPlugInHostRef    inHost,
-//                         CFStringRef                 inKey,
-//                         CFPropertyListRef           inData);
+    //     /*!
+    //         @method         DeleteFromStorage
+    //         @abstract       This method will remove the given key and any associated data from storage.
+    //         @param          inHost
+    //                             The AudioServerPlugInHostRef passed to the plug-in at initialization.
+    //         @param          inKey
+    //                             A CFStringRef that contains the name of the key to be deleted. Note that
+    //                             the Host will make sure that the keys for one plug-in do not collide
+    //                             with the keys for other plug-ins.
+    //         @result         An OSStatus indicating success or failure.
+    //     */
+    //     OSStatus
+    //     (*DeleteFromStorage)(   AudioServerPlugInHostRef    inHost,
+    //                             CFStringRef                 inKey);
 
-//     /*!
-//         @method         DeleteFromStorage
-//         @abstract       This method will remove the given key and any associated data from storage.
-//         @param          inHost
-//                             The AudioServerPlugInHostRef passed to the plug-in at initialization.
-//         @param          inKey
-//                             A CFStringRef that contains the name of the key to be deleted. Note that
-//                             the Host will make sure that the keys for one plug-in do not collide
-//                             with the keys for other plug-ins.
-//         @result         An OSStatus indicating success or failure.
-//     */
-//     OSStatus
-//     (*DeleteFromStorage)(   AudioServerPlugInHostRef    inHost,
-//                             CFStringRef                 inKey);
+    // #pragma mark Device Operations
 
-// #pragma mark Device Operations
-
-//     /*!
-//         @typedef        RequestDeviceConfigurationChange
-//         @abstract       Plug-ins invoke this routine to tell the Host to initiate a configuration
-//                         change operation.
-//         @discussion     When a plug-in's device object needs to change its structure or change any
-//                         state related to IO for any reason, it must begin this operation by invoking
-//                         this Host method. The device object may not perform the state change until
-//                         the Host gives the device clearance to do so by invoking the plug-in's
-//                         PerformDeviceConfigurationChange() routine. Note that the call to
-//                         PerformDeviceConfigurationChange() may be deferred to another thread at the
-//                         discretion of the host.
-//                         The sorts of changes that must go through this mechanism are anything that
-//                         affects either the structure of the device or IO. This includes, but is not
-//                         limited to, changing stream layout, adding/removing controls, changing the
-//                         nominal sample rate of the device, changing any sample formats on any stream
-//                         on the device, changing the size of the ring buffer, changing presentation
-//                         latency, and changing the safety offset.
-//         @param          inHost
-//                             The AudioServerPlugInHostRef passed to the plug-in at initialization.
-//         @param          inDeviceObjectID
-//                             The AudioObjectID of the device making the request.
-//         @param          inChangeAction
-//                             A UInt64 indicating the action the device object wants to take. It will
-//                             be passed back to the device in the invocation of
-//                             PerformDeviceConfigurationChange(). Note that this value is purely for
-//                             the plug-in's usage. The Host does not look at this value.
-//         @param          inChangeInfo
-//                             A pointer to information about the configuration change. It will be
-//                             passed back to the device in the invocation of
-//                             PerformDeviceConfigurationChange(). Note that this value is purely for
-//                             the plug-in's usage. The Host does not look at this value.
-//         @result         An OSStatus indicating success or failure. Note that even if this method
-//                         indicates success, the Host may still abort the change later.
-//     */
-//     OSStatus
-//     (*RequestDeviceConfigurationChange)(    AudioServerPlugInHostRef    inHost,
-//                                             AudioObjectID               inDeviceObjectID,
-//                                             UInt64                      inChangeAction,
-//                                             void* __nullable            inChangeInfo);
-// };
+    //     /*!
+    //         @typedef        RequestDeviceConfigurationChange
+    //         @abstract       Plug-ins invoke this routine to tell the Host to initiate a configuration
+    //                         change operation.
+    //         @discussion     When a plug-in's device object needs to change its structure or change any
+    //                         state related to IO for any reason, it must begin this operation by invoking
+    //                         this Host method. The device object may not perform the state change until
+    //                         the Host gives the device clearance to do so by invoking the plug-in's
+    //                         PerformDeviceConfigurationChange() routine. Note that the call to
+    //                         PerformDeviceConfigurationChange() may be deferred to another thread at the
+    //                         discretion of the host.
+    //                         The sorts of changes that must go through this mechanism are anything that
+    //                         affects either the structure of the device or IO. This includes, but is not
+    //                         limited to, changing stream layout, adding/removing controls, changing the
+    //                         nominal sample rate of the device, changing any sample formats on any stream
+    //                         on the device, changing the size of the ring buffer, changing presentation
+    //                         latency, and changing the safety offset.
+    //         @param          inHost
+    //                             The AudioServerPlugInHostRef passed to the plug-in at initialization.
+    //         @param          inDeviceObjectID
+    //                             The AudioObjectID of the device making the request.
+    //         @param          inChangeAction
+    //                             A UInt64 indicating the action the device object wants to take. It will
+    //                             be passed back to the device in the invocation of
+    //                             PerformDeviceConfigurationChange(). Note that this value is purely for
+    //                             the plug-in's usage. The Host does not look at this value.
+    //         @param          inChangeInfo
+    //                             A pointer to information about the configuration change. It will be
+    //                             passed back to the device in the invocation of
+    //                             PerformDeviceConfigurationChange(). Note that this value is purely for
+    //                             the plug-in's usage. The Host does not look at this value.
+    //         @result         An OSStatus indicating success or failure. Note that even if this method
+    //                         indicates success, the Host may still abort the change later.
+    //     */
+    //     OSStatus
+    //     (*RequestDeviceConfigurationChange)(    AudioServerPlugInHostRef    inHost,
+    //                                             AudioObjectID               inDeviceObjectID,
+    //                                             UInt64                      inChangeAction,
+    //                                             void* __nullable            inChangeInfo);
+    // };
 }
 
 // //==================================================================================================

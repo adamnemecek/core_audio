@@ -23,3 +23,5 @@ pub use core_audio::*;
 
 mod host_time;
 pub use host_time::*;
+
+pub type OSStatus = u32;

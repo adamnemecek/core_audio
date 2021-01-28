@@ -44,12 +44,14 @@
 //     @abstract       A UInt32 that provides a handle on a specific AudioObject.
 // */
 // typedef UInt32  AudioObjectID;
+pub type AudioObjectID = u32;
 
 // /*!
 //     @typedef        AudioClassID
 //     @abstract       AudioClassIDs are used to identify the class of an AudioObject.
 // */
 // typedef UInt32  AudioClassID;
+pub type AudioClassID = u32;
 
 // /*!
 //     @typedef        AudioObjectPropertySelector
@@ -62,6 +64,7 @@
 //                     it may not implement them all.
 // */
 // typedef UInt32  AudioObjectPropertySelector;
+pub type AudioObjectPropertySelector = u32;
 
 // /*!
 //     @typedef        AudioObjectPropertyScope
@@ -73,6 +76,7 @@
 //                     scopes. A subclass inherits its superclass's set of scopes.
 // */
 // typedef UInt32  AudioObjectPropertyScope;
+pub type AudioObjectPropertyScope = u32;
 
 // /*!
 //     @typedef        AudioObjectPropertyElement
@@ -86,6 +90,7 @@
 //                     same scope. There is no inheritance of elements.
 // */
 // typedef UInt32  AudioObjectPropertyElement;
+pub type AudioObjectPropertyElement = u32;
 
 // /*!
 //     @struct         AudioObjectPropertyAddress
@@ -104,6 +109,12 @@
 //     AudioObjectPropertyScope    mScope;
 //     AudioObjectPropertyElement  mElement;
 // };
+#[derive(Clone, Copy, PartialEq, Eq)]
+pub struct AudioObjectPropertyAddress {
+    pub m_selector: AudioObjectPropertySelector,
+    pub m_scope: AudioObjectPropertyScope,
+    pub m_element: AudioObjectPropertyElement,
+}
 // typedef struct AudioObjectPropertyAddress   AudioObjectPropertyAddress;
 
 // //==================================================================================================

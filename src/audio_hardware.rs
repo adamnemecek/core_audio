@@ -1399,6 +1399,56 @@ impl AudioObjectPropertySelector {
 //     kAudioDevicePropertySubMute                                         = 'smut'
 // };
 
+impl AudioObjectPropertySelector {
+    pub const JackIsConnected: Self = Self::new(b"jack");
+    pub const VolumeScalar: Self = Self::new(b"volm");
+    pub const VolumeDecibels: Self = Self::new(b"vold");
+    pub const VolumeRangeDecibels: Self = Self::new(b"vdb#");
+    pub const VolumeScalarToDecibels: Self = Self::new(b"v2db");
+    pub const VolumeDecibelsToScalar: Self = Self::new(b"db2v");
+    pub const StereoPan: Self = Self::new(b"span");
+    pub const StereoPanChannels: Self = Self::new(b"spn#");
+    pub const Mute: Self = Self::new(b"mute");
+    pub const Solo: Self = Self::new(b"solo");
+    pub const PhantomPower: Self = Self::new(b"phan");
+    pub const PhaseInvert: Self = Self::new(b"phsi");
+    pub const ClipLight: Self = Self::new(b"clip");
+    pub const Talkback: Self = Self::new(b"talb");
+    pub const Listenback: Self = Self::new(b"lsnb");
+    pub const DataSource: Self = Self::new(b"ssrc");
+    pub const DataSources: Self = Self::new(b"ssc#");
+    pub const DataSourceNameForIDCFString: Self = Self::new(b"lscn");
+    pub const DataSourceKindForID: Self = Self::new(b"ssck");
+    pub const ClockSource: Self = Self::new(b"csrc");
+    pub const ClockSources: Self = Self::new(b"csc#");
+    pub const ClockSourceNameForIDCFString: Self = Self::new(b"lcsn");
+    pub const ClockSourceKindForID: Self = Self::new(b"csck");
+    pub const PlayThru: Self = Self::new(b"thru");
+    pub const PlayThruSolo: Self = Self::new(b"thrs");
+    pub const PlayThruVolumeScalar: Self = Self::new(b"mvsc");
+    pub const PlayThruVolumeDecibels: Self = Self::new(b"mvdb");
+    pub const PlayThruVolumeRangeDecibels: Self = Self::new(b"mvd#");
+    pub const PlayThruVolumeScalarToDecibels: Self = Self::new(b"mv2d");
+    pub const PlayThruVolumeDecibelsToScalar: Self = Self::new(b"mv2s");
+    pub const PlayThruStereoPan: Self = Self::new(b"mspn");
+    pub const PlayThruStereoPanChannels: Self = Self::new(b"msp#");
+    pub const PlayThruDestination: Self = Self::new(b"mdds");
+    pub const PlayThruDestinations: Self = Self::new(b"mdd#");
+    pub const PlayThruDestinationNameForIDCFString: Self = Self::new(b"mddc");
+    pub const ChannelNominalLineLevel: Self = Self::new(b"nlvl");
+    pub const ChannelNominalLineLevels: Self = Self::new(b"nlv#");
+    pub const ChannelNominalLineLevelNameForIDCFString: Self = Self::new(b"lcnl");
+    pub const HighPassFilterSetting: Self = Self::new(b"hipf");
+    pub const HighPassFilterSettings: Self = Self::new(b"hip#");
+    pub const HighPassFilterSettingNameForIDCFString: Self = Self::new(b"hipl");
+    pub const SubVolumeScalar: Self = Self::new(b"svlm");
+    pub const SubVolumeDecibels: Self = Self::new(b"svld");
+    pub const SubVolumeRangeDecibels: Self = Self::new(b"svd#");
+    pub const SubVolumeScalarToDecibels: Self = Self::new(b"sv2d");
+    pub const SubVolumeDecibelsToScalar: Self = Self::new(b"sd2v");
+    pub const SubMute: Self = Self::new(b"smut");
+}
+
 // //==================================================================================================
 // #pragma mark AudioDevice Functions
 
@@ -1427,7 +1477,9 @@ impl AudioObjectPropertySelector {
 //                             AudioDeviceIOProc                           inProc,
 //                             void* __nullable                            inClientData,
 //                             AudioDeviceIOProcID __nullable * __nonnull  outIOProcID)                                    __OSX_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_2_0);
-
+extern "C" {
+    fn AudioDeviceCreateIOProcID() -> OSStatus;
+}
 // /*!
 //     @function       AudioDeviceCreateIOProcIDWithBlock
 //     @abstract       Creates an AudioDeviceIOProcID from an AudioDeviceIOBlock

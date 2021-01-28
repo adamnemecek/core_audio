@@ -352,20 +352,20 @@ use cc4::four_cc;
 //     kAudioServerPlugInIOOperationWriteMix       = 'rite'
 // };
 
-// #[repr(i32)]
-// #[derive(Clone, Copy, PartialEq, Eq)]
-// enum AudioServerPlugInIOOperation {
-//     Thread         = 'thrd',
-//     Cycle          = 'cycl',
-//     ReadInput      = 'read',
-//     ConvertInput   = 'cinp',
-//     ProcessInput   = 'pinp',
-//     ProcessOutput  = 'pout',
-//     MixOutput      = 'mixo',
-//     ProcessMix     = 'pmix',
-//     ConvertMix     = 'cmix',
-//     WriteMix       = 'rite'
-// }
+#[repr(u32)]
+#[derive(Clone, Copy, PartialEq, Eq)]
+pub enum AudioServerPlugInIOOperation {
+    Thread = four_cc(b"thrd"),
+    Cycle = four_cc(b"cycl"),
+    ReadInput = four_cc(b"read"),
+    ConvertInput = four_cc(b"cinp"),
+    ProcessInput = four_cc(b"pinp"),
+    ProcessOutput = four_cc(b"pout"),
+    MixOutput = four_cc(b"mixo"),
+    ProcessMix = four_cc(b"pmix"),
+    ConvertMix = four_cc(b"cmix"),
+    WriteMix = four_cc(b"rite"),
+}
 
 // //==================================================================================================
 // #pragma mark -

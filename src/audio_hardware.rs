@@ -1,3 +1,13 @@
+use crate::prelude::*;
+use core_audio_types::prelude::*;
+use cc4::four_cc;
+
+#[repr(u32)]
+
+pub enum OSStatus {
+    A,
+}
+
 // /*==================================================================================================
 //      File:       CoreAudio/AudioHardware.h
 
@@ -141,6 +151,8 @@
 //                                     const AudioObjectPropertyAddress*   inAddresses,
 //                                     void* __nullable                    inClientData);
 
+pub type AudioObjectPropertyListenerProc =
+    fn(AudioObjectID, u32, AudioObjectPropertyAddress, *const std::ffi::c_void) -> OSStatus;
 // /*!
 //     @typedef        AudioObjectPropertyListenerBlock
 //     @abstract       Clients register an AudioObjectPropertyListenerBlock with an AudioObject in
@@ -217,7 +229,12 @@
 // extern Boolean
 // AudioObjectHasProperty( AudioObjectID                       inObjectID,
 //                         const AudioObjectPropertyAddress*   inAddress)                              __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
-
+extern "C" {
+    pub fn AudioObjectHasProperty(
+        object_id: AudioObjectID,
+        address: *const AudioObjectPropertyAddress,
+    ) -> bool;
+}
 // /*!
 //     @function       AudioObjectIsPropertySettable
 //     @abstract       Queries an AudioObject about whether or not the given property can be set using
@@ -234,7 +251,13 @@
 // AudioObjectIsPropertySettable(  AudioObjectID                       inObjectID,
 //                                 const AudioObjectPropertyAddress*   inAddress,
 //                                 Boolean*                            outIsSettable)                  __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
-
+extern "C" {
+    pub fn AudioObjectIsPropertySettable(
+        object_id: AudioObjectID,
+        address: *const AudioObjectPropertyAddress,
+        settable: *mut bool,
+    ) -> OSStatus;
+}
 // /*!
 //     @function       AudioObjectGetPropertyDataSize
 //     @abstract       Queries an AudioObject to find the size of the data for the given property.
@@ -260,7 +283,9 @@
 //                                 UInt32                              inQualifierDataSize,
 //                                 const void* __nullable              inQualifierData,
 //                                 UInt32*                             outDataSize)                    __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
-
+extern "C" {
+    pub fn AudioObjectGetPropertyDataSize() -> !;
+}
 // /*!
 //     @function       AudioObjectGetPropertyData
 //     @abstract       Queries an AudioObject to get the data of the given property and places it in
@@ -292,7 +317,9 @@
 //                             const void* __nullable              inQualifierData,
 //                             UInt32*                             ioDataSize,
 //                             void*                               outData)                            __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
-
+extern "C" {
+    pub fn AudioObjectGetPropertyData() -> !;
+}
 // /*!
 //     @function       AudioObjectSetPropertyData
 //     @abstract       Tells an AudioObject to change the value of the given property using the
@@ -325,7 +352,9 @@
 //                             const void* __nullable              inQualifierData,
 //                             UInt32                              inDataSize,
 //                             const void*                         inData)                             __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
-
+extern "C" {
+    pub fn AudioObjectSetPropertyData() -> !;
+}
 // /*!
 //     @function       AudioObjectAddPropertyListener
 //     @abstract       Registers the given AudioObjectPropertyListenerProc to receive notifications
@@ -346,7 +375,9 @@
 //                                 const AudioObjectPropertyAddress*   inAddress,
 //                                 AudioObjectPropertyListenerProc     inListener,
 //                                 void* __nullable                    inClientData)                   __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
-
+extern "C" {
+    pub fn AudioObjectAddPropertyListener() -> !;
+}
 // /*!
 //     @function       AudioObjectRemovePropertyListener
 //     @abstract       Unregisters the given AudioObjectPropertyListenerProc from receiving
@@ -367,7 +398,9 @@
 //                                     const AudioObjectPropertyAddress*   inAddress,
 //                                     AudioObjectPropertyListenerProc     inListener,
 //                                     void* __nullable                    inClientData)               __OSX_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
-
+extern "C" {
+    pub fn AudioObjectRemovePropertyListener() -> !;
+}
 // /*!
 //     @function       AudioObjectAddPropertyListenerBlock
 //     @abstract       Registers the given AudioObjectPropertyListenerBlock to receive notifications
@@ -396,7 +429,9 @@
 //                                         const AudioObjectPropertyAddress*   inAddress,
 //                                         dispatch_queue_t __nullable         inDispatchQueue,
 //                                         AudioObjectPropertyListenerBlock    inListener)             __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_7_0);
-
+extern "C" {
+    pub fn AudioObjectAddPropertyListenerBlock() -> !;
+}
 // /*!
 //     @function       AudioObjectRemovePropertyListenerBlock
 //     @abstract       Unregisters the given AudioObjectPropertyListenerBlock from receiving
@@ -417,7 +452,9 @@
 //                                         const AudioObjectPropertyAddress*   inAddress,
 //                                         dispatch_queue_t __nullable         inDispatchQueue,
 //                                         AudioObjectPropertyListenerBlock    inListener)             __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_7_0);
-
+extern "C" {
+    pub fn AudioObjectRemovePropertyListenerBlock() -> !;
+}
 // //==================================================================================================
 // #pragma mark -
 // #pragma mark AudioSystemObject Constants
@@ -605,6 +642,44 @@
 //     kAudioHardwarePropertyServiceRestarted                      = 'srst',
 //     kAudioHardwarePropertyPowerHint                             = 'powh'
 // };
+
+// pub struct SS(u32);
+// impl SS {
+
+// }
+
+impl AudioObjectPropertySelector {
+    pub const fn new(cc: &[u8; 4]) -> Self {
+        Self(four_cc(cc))
+    }
+}
+
+impl AudioObjectPropertySelector {
+    pub const Devices: Self = Self::new(b"dev#");
+    pub const DefaultInputDevice: Self = Self::new(b"dIn ");
+    pub const DefaultOutputDevice: Self = Self::new(b"dOut");
+    pub const DefaultSystemOutputDevice: Self = Self::new(b"sOut");
+    pub const TranslateUIDToDevice: Self = Self::new(b"uidd");
+    pub const MixStereoToMono: Self = Self::new(b"stmo");
+    pub const PlugInList: Self = Self::new(b"plg#");
+    pub const TranslateBundleIDToPlugIn: Self = Self::new(b"bidp");
+    pub const TransportManagerList: Self = Self::new(b"tmg#");
+    pub const TranslateBundleIDToTransportManager: Self = Self::new(b"tmbi");
+    pub const BoxList: Self = Self::new(b"box#");
+    pub const TranslateUIDToBox: Self = Self::new(b"uidb");
+    pub const ClockDeviceList: Self = Self::new(b"clk#");
+    pub const TranslateUIDToClockDevice: Self = Self::new(b"uidc");
+    pub const ProcessIsMaster: Self = Self::new(b"mast");
+    pub const IsInitingOrExiting: Self = Self::new(b"inot");
+    pub const UserIDChanged: Self = Self::new(b"euid");
+    pub const ProcessIsAudible: Self = Self::new(b"pmut");
+    pub const SleepingIsAllowed: Self = Self::new(b"slep");
+    pub const UnloadingIsAllowed: Self = Self::new(b"unld");
+    pub const HogModeIsAllowed: Self = Self::new(b"hogr");
+    pub const UserSessionIsActiveOrHeadless: Self = Self::new(b"user");
+    pub const ServiceRestarted: Self = Self::new(b"srst");
+    pub const PowerHint: Self = Self::new(b"powh");
+}
 
 // //==================================================================================================
 // #pragma mark AudioSystemObject Functions

@@ -175,6 +175,13 @@ use cc4::four_cc;
 //     UInt32                      mQualifierDataType;
 // };
 // typedef struct AudioServerPlugInCustomPropertyInfo  AudioServerPlugInCustomPropertyInfo;
+#[repr(C)]
+#[derive(Clone, Copy, PartialEq, Eq)]
+pub struct AudioServerPlugInCustomPropertyInfo {
+    pub m_selector: AudioObjectPropertySelector,
+    pub m_property_data_type: u32,
+    pub m_qualifier_data_type: u32,
+}
 
 // /*!
 //     @struct         AudioServerPlugInClientInfo
@@ -241,6 +248,19 @@ use cc4::four_cc;
 //     Float64         mDeviceHostTicksPerFrame;
 // };
 // typedef struct AudioServerPlugInIOCycleInfo AudioServerPlugInIOCycleInfo;
+#[derive(Clone, Copy, PartialEq, Eq)]
+pub struct AudioTimeStamp {}
+#[repr(C)]
+#[derive(Clone, Copy, PartialEq)]
+pub struct AudioServerPlugInIOCycleInfo {
+    pub m_io_cycle_counter: u64,
+    pub m_nominal_io_buffer_frame_size: u32,
+    pub m_current_time: AudioTimeStamp,
+    pub m_input_time: AudioTimeStamp,
+    pub m_output_time: AudioTimeStamp,
+    pub m_master_host_ticks_per_frame: f64,
+    pub m_device_host_ticks_per_frame: f64,
+}
 
 // //==================================================================================================
 // #pragma mark -

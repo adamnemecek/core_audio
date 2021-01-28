@@ -71,7 +71,7 @@ pub struct AudioClassID(u32);
 // typedef UInt32  AudioObjectPropertySelector;
 #[repr(C)]
 #[derive(Clone, Copy, PartialEq, Eq)]
-pub struct AudioObjectPropertySelector(u32);
+pub struct AudioObjectPropertySelector(pub u32);
 
 // /*!
 //     @typedef        AudioObjectPropertyScope
@@ -120,6 +120,7 @@ pub struct AudioObjectPropertyElement(u32);
 //     AudioObjectPropertyScope    mScope;
 //     AudioObjectPropertyElement  mElement;
 // };
+#[repr(C)]
 #[derive(Clone, Copy, PartialEq, Eq)]
 pub struct AudioObjectPropertyAddress {
     pub m_selector: AudioObjectPropertySelector,

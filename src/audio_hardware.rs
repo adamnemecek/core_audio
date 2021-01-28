@@ -1068,6 +1068,24 @@ impl AudioHardwareIOProcStreamUsage {
 //     kAudioDevicePropertyIOThreadOSWorkgroup				= 'oswg'
 // };
 
+impl AudioObjectPropertySelector {
+    pub const PlugIn: Self = Self::new(b"plug");
+    pub const DeviceHasChanged: Self = Self::new(b"diff");
+    pub const DeviceIsRunningSomewhere: Self = Self::new(b"gone");
+    pub const ProcessorOverload: Self = Self::new(b"over");
+    pub const IOStoppedAbnormally: Self = Self::new(b"stpd");
+    pub const HogMode: Self = Self::new(b"oink");
+    pub const BufferFrameSize: Self = Self::new(b"fsiz");
+    pub const BufferFrameSizeRange: Self = Self::new(b"fsz#");
+    pub const UsesVariableBufferFrameSizes: Self = Self::new(b"vfsz");
+    pub const IOCycleUsage: Self = Self::new(b"ncyc");
+    pub const StreamConfiguration: Self = Self::new(b"slay");
+    pub const IOProcStreamUsage: Self = Self::new(b"suse");
+    pub const ActualSampleRate: Self = Self::new(b"asrt");
+    pub const ClockDevice: Self = Self::new(b"apcd");
+    pub const IOThreadOSWorkgroup: Self = Self::new(b"oswg");
+}
+
 // /*!
 //     @enum           AudioDevice Properties Implemented via AudioControl objects
 //     @abstract       AudioObjectPropertySelector values for AudioDevice properties that are

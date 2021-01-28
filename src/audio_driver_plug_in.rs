@@ -28,7 +28,6 @@
 //     each device the plug-in supports that is attached to the system in each process that is using
 //     the HAL.
 // */
-
 // //==================================================================================================
 // #pragma mark    Includes
 
@@ -126,7 +125,6 @@
 // /*!
 //     @functiongroup  AudioDriver Plug-In
 // */
-
 // /*!
 //     @function       AudioDriverPlugInOpen
 //     @abstract       Instantiates a new instance of the driver plug-in.

@@ -1,3 +1,4 @@
+use cc4::four_cc;
 // /*==================================================================================================
 //      File:       CoreAudio/AudioServerPlugIn.h
 
@@ -17,7 +18,7 @@
 // #pragma mark Overview
 // /*!
 //     @header AudioServerPlugIn
-    
+
 //     An AudioServerPlugIn is a CFPlugIn that is loaded by the host process as a driver. The plug-in
 //     bundle is installed in /Library/Audio/Plug-Ins/HAL. The bundle's name has the suffix ".driver".
 //     When loading the plug-in, the host looks for factories with the plug-in type,
@@ -102,7 +103,6 @@
 //             "com.apple.developer.driverkit.userclient-access" entitlements necessary for talking to
 //             the Driver Extension.
 // */
-
 // //==================================================================================================
 // #pragma mark -
 // #pragma mark Includes
@@ -252,7 +252,7 @@
 // #define kAudioServerPlugInTypeUUID  CFUUIDGetConstantUUIDWithBytes(NULL, 0x44, 0x3A, 0xBA, 0xB8, 0xE7, 0xB3, 0x49, 0x1A, 0xB9, 0x85, 0xBE, 0xB9, 0x18, 0x70, 0x30, 0xDB)
 
 // /*!
-//     @enum           Predefined AudioObjectID values 
+//     @enum           Predefined AudioObjectID values
 //     @abstract       ObjectIDs that are always the same
 //     @constant       kAudioObjectPlugInObject
 //                         The AudioObjectID that always refers to the one and only instance of the
@@ -264,7 +264,7 @@
 // };
 
 // /*!
-//     @enum           Predefined client ID values 
+//     @enum           Predefined client ID values
 //     @constant       kAudioServerPlugInHostClientID
 //                         No actual client will have this value as its ID. It is only used when the
 //                         Host is making a request on its own behalf.
@@ -429,22 +429,12 @@
 //     kAudioDeviceClockAlgorithm12PtMovingWindowAverage   = 'mavg'
 // };
 
-const fn four_cc(cc: &[u8; 4]) -> u32 {
-    let v = unsafe { *(cc.as_ptr() as *const u32) };
-    // #[cfg(target_endian="little")] {
-        v
-    // }
-    // #[cfg(target_endian="big")] {
-    //     v.to_be()
-    // }
-}
 #[repr(u32)]
 #[derive(Clone, Copy, PartialEq, Eq)]
 pub enum AudioDeviceClockAlgorithmSelector {
     Raw = four_cc(b"raww"),
-    // Raw                       = 'raww',
-    // SimpleIIR                 = 'iirf',
-    // 12PtMovingWindowAverage   = 'mavg'
+    SimpleIIR = four_cc(b"iirf"),
+    MovingWindowAverage12Pt = four_cc(b"mavg"),
 }
 
 // //==================================================================================================
@@ -491,8 +481,7 @@ pub enum AudioDeviceClockAlgorithmSelector {
 // struct  AudioServerPlugInHostInterface
 // {
 pub struct AudioServerPlugInHostInterface {
-
-// #pragma mark Property Operations
+    // #pragma mark Property Operations
 
 //     /*!
 //         @method         PropertiesChanged

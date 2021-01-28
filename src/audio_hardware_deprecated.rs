@@ -266,7 +266,6 @@
 // /*!
 //     @functiongroup  AudioSystemObject
 // */
-
 // /*!
 //     @function       AudioHardwareAddRunLoopSource
 //     @abstract       Add the given CFRunLoopSource to the the HAL's notification CFRunLoop.
@@ -698,7 +697,6 @@
 // /*!
 //     @functiongroup  AudioDevice
 // */
-
 // /*!
 //     @function       AudioDeviceAddIOProc
 //     @abstract       Registers the given AudioDeviceIOProc with the AudioDevice.
@@ -1015,7 +1013,6 @@
 // /*!
 //     @functiongroup  AudioStream
 // */
-
 // /*!
 //     @function       AudioStreamGetPropertyInfo
 //     @abstract       Retrieve information about the given property of an AudioStream.
@@ -1146,7 +1143,6 @@
 //                                     UInt32                          inChannel,
 //                                     AudioDevicePropertyID           inPropertyID,
 //                                     AudioStreamPropertyListenerProc inProc)                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1, __MAC_10_6, __IPHONE_2_0, __IPHONE_2_0);
-
 
 // //==================================================================================================
 // #pragma mark -

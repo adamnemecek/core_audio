@@ -22,7 +22,7 @@
 //     The audio HAL provides an abstraction through which applications can access audio hardware. To
 //     do this, the HAL provides a small set of AudioObjects that provide access to the various pieces
 //     of the system.
-    
+
 //     AudioObjects all have a set of properties that describe and manipulate their state. A property
 //     is accessed via an ordered triple. The first ordinate is the selector which describes the
 //     property. The other two ordinates are the scope and element that identify the particular part of
@@ -32,36 +32,36 @@
 //     qualifier when querying. The qualifier allows for additional information to be provided to be
 //     used in the manipulation of the property. Changing the value of a property is always considered
 //     asynchronous.
-    
+
 //     Applications use the routines AudioObjectHasProperty(), AudioObjectIsPropertySettable() and
 //     AudioObjectGetPropertyDataSize() to find useful meta-information about the property. Apps use
 //     AudioObjectGetPropertyData() and AudioObjectSetPropertyData() to manipulate the value of the
 //     property. Apps use AudioObjectAddPropertyListener() and AudioObjectRemovePropertyListener() to
 //     register/unregister a function that is to be called when a given property's value changes.
-    
+
 //     The class of an AudioObject determines the basic functionality of the object in terms of what
 //     functions will operate on it as well as the set of properties that can be expected to be
 //     implemented by the object. The set of available classes for objects is limited to those defined
 //     here. There are no other classes. The set of classes is arranged in a hierarchy such that one
 //     class inherits the properties/routines of its super class.
-    
-//     The base class for all AudioObjects is the class AudioObject. As such, each AudioObject will 
+
+//     The base class for all AudioObjects is the class AudioObject. As such, each AudioObject will
 //     provide basic properties such as its class, its human readable name, and the other
 //     AudioObjects it contains. Other important classes include AudioSystemObject, AudioDevice, and
 //     AudioStream.
-    
+
 //     The AudioObjects in the HAL are arranged in a containment hierarchy. The root of the hierarchy
 //     is the one and only instance of the AudioSystemObject class. The properties of the
 //     AudioSystemObject describe the process global settings such as the various default devices and
 //     the notification run loop. The AudioSystemObject also contains all the AudioDevices that are
 //     available.
-    
+
 //     Instances of the AudioDevice class encapsulate individual audio devices. An AudioDevice serves
 //     as the basic unit of IO. It provides a single IO cycle, a timing source based on it, and all the
 //     buffers synchronized to it. The IO cycle presents all the synchronized buffers to the client in
 //     the same call out along with time stamps that specify the current time, when the input data was
 //     acquired and when the output data will be presented.
-    
+
 //     AudioDevices contain instances of the AudioStream class. An AudioStream represents a single
 //     buffer of data for transferring across the user/kernel boundary. As such, AudioStreams are the
 //     gatekeepers of format information. Each has its own format and list of available formats.
@@ -69,13 +69,12 @@
 //     the format is a linear PCM format, the data will always be presented as 32 bit, native endian
 //     floating point. All conversions to and from the true physical format of the hardware is handled
 //     by the device's driver.
-    
+
 //     Both AudioDevices and AudioStreams can contain instances of the AudioControl class or its many
 //     subclasses. An AudioControl provides properties that describe/manipulate a particular aspect of
 //     the object such as gain, mute, data source selection, etc. Many common controls are also
 //     also available as properties on the AudioDevice or AudioStream.
 // */
-
 // //==================================================================================================
 // #pragma mark -
 // #pragma mark Includes
@@ -99,7 +98,7 @@
 // #pragma mark Basic Constants
 
 // /*!
-//     @enum           Predefined AudioObjectID values 
+//     @enum           Predefined AudioObjectID values
 //     @abstract       ObjectIDs that are always the same
 //     @constant       kAudioObjectSystemObject
 //                         The AudioObjectID that always refers to the one and only instance of the
@@ -197,7 +196,6 @@
 // /*!
 //     @functiongroup  AudioObject
 // */
-
 // /*!
 //     @function       AudioObjectShow
 //     @abstract       Prints to standard out a textural description of the AudioObject.
@@ -409,7 +407,7 @@
 //                         The AudioObjectPropertyAddress indicating from which property the listener
 //                         should be removed.
 //     @param          inDispatchQueue
-//                         The dispatch queue on which the listener block was being dispatched to. 
+//                         The dispatch queue on which the listener block was being dispatched to.
 //     @param          inListener
 //                         The AudioObjectPropertyListenerBlock being removed.
 //     @result         An OSStatus indicating success or failure.
@@ -521,14 +519,14 @@
 //                         to any AudioBoxes. Rather, this property will return kAudioObjectUnknown
 //                         as the value of the property.
 //     @constant       kAudioHardwarePropertyClockDeviceList
-//                         An array of AudioObjectIDs that represent all the AudioClockDevice objects 
+//                         An array of AudioObjectIDs that represent all the AudioClockDevice objects
 //                         currently provided by the system.
 //     @constant       kAudioHardwarePropertyTranslateUIDToClockDevice
 //                         This property fetches the AudioObjectID that corresponds to the AudioClockDevice
 //                         that has the given UID. The UID is passed in via the qualifier as a CFString
 //                         while the AudioObjectID for the AudioClockDevice is returned to the caller
 //                         as the property's data. Note that an error is not returned if the UID doesn't
-//                         refer to any AudioClockDevice. Rather, this property will return 
+//                         refer to any AudioClockDevice. Rather, this property will return
 //                         kAudioObjectUnknown as the value of the property.
 //     @constant       kAudioHardwarePropertyProcessIsMaster
 //                         A UInt32 where 1 means that the current process contains the master instance
@@ -614,7 +612,6 @@
 // /*!
 //     @functiongroup  AudioSystemObject
 // */
-
 // /*!
 //     @function       AudioHardwareUnload
 //     @abstract       When this routine is called, all IO on all devices within a process will be
@@ -706,7 +703,7 @@
 // {
 //     kAudioTransportManagerCreateEndPointDevice  = 'cdev',
 //     kAudioTransportManagerDestroyEndPointDevice = 'ddev'
-    
+
 // };
 
 // //==================================================================================================
@@ -766,7 +763,7 @@
 
 // /*!
 //     @typedef        AudioDeviceIOBlock
-//     @abstract       An AudioDeviceIOBlock is called by an AudioDevice to provide input data read 
+//     @abstract       An AudioDeviceIOBlock is called by an AudioDevice to provide input data read
 //                     from the device and collect output data to be written to the device for the
 //                     current IO cycle.
 //     @param          inNow
@@ -1299,7 +1296,6 @@
 // /*!
 //     @functiongroup  AudioDevice
 // */
-
 // /*!
 //     @function       AudioDeviceCreateIOProcID
 //     @abstract       Creates an AudioDeviceIOProcID from an AudioDeviceIOProc and a client data
@@ -1565,7 +1561,7 @@
 //                     the output streams are all fed the same data.
 //  */
 // #define kAudioAggregateDeviceIsStackedKey       "stacked"
-    
+
 // //==================================================================================================
 // #pragma mark AudioAggregateDevice Properties
 

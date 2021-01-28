@@ -17,11 +17,10 @@
 // #pragma mark Overview
 // /*!
 //     @header AudioHardwareBase
-    
+
 //     This file defines the HAL's object model including the properties and their needed types and
 //     constants that describe the property values.
 // */
-
 // //==================================================================================================
 // //  Includes
 
@@ -164,7 +163,7 @@
 // };
 
 // /*!
-//     @enum           Predefined AudioObjectID values 
+//     @enum           Predefined AudioObjectID values
 //     @abstract       ObjectIDs that are always the same
 //     @constant       kAudioObjectUnknown
 //                         This is the sentinel value. No object will have an ID whose value is 0.
@@ -387,11 +386,11 @@
 //                         An array of AudioObjectIDs that represent all the AudioClockDevice objects
 //                         currently provided by the plug-in.
 //     @constant       kAudioPlugInPropertyTranslateUIDToClockDevice
-//                         This property fetches the AudioObjectID that corresponds to the 
-//                         AudioClockDevice that has the given UID. The UID is passed in via the 
-//                         qualifier as a CFString while the AudioObjectID for the AudioClockDevice is 
-//                         returned to the caller as the property's data. Note that an error is not 
-//                         returned if the UID doesn't refer to any AudioClockDevices. Rather, this 
+//                         This property fetches the AudioObjectID that corresponds to the
+//                         AudioClockDevice that has the given UID. The UID is passed in via the
+//                         qualifier as a CFString while the AudioObjectID for the AudioClockDevice is
+//                         returned to the caller as the property's data. Note that an error is not
+//                         returned if the UID doesn't refer to any AudioClockDevices. Rather, this
 //                         property will return kAudioObjectUnknown as the value of the property.
 // */
 // CF_ENUM(AudioObjectPropertySelector)
@@ -446,7 +445,7 @@
 //                         UID doesn't refer to any AudioEndpoints. Rather, this property will return
 //                         kAudioObjectUnknown as the value of the property.
 //     @constant       kAudioTransportManagerPorpertyTransportType
-//                         A UInt32 whose value indicates how the transport manager's endpoints and 
+//                         A UInt32 whose value indicates how the transport manager's endpoints and
 //                         endpoint devices are connected to the CPU. Constants for some of the values
 //                         for this property can be found in the enum in the AudioDevice Constants
 //                         section of this file.
@@ -517,7 +516,7 @@
 //                         will be empty.
 //     @constant       kAudioBoxPropertyClockDeviceList
 //                         An array of AudioObjectIDs that represent all the AudioClockDevice objects
-//                         that came out of the given AudioBox. Note that until a box is enabled, this 
+//                         that came out of the given AudioBox. Note that until a box is enabled, this
 //                         list will be empty.
 // */
 // CF_ENUM(AudioObjectPropertySelector)
@@ -734,7 +733,7 @@
 // //==================================================================================================
 // #pragma mark -
 // #pragma mark AudioClockDevice Constants
-    
+
 // /*!
 //     @enum           AudioClockDevice Class Constants
 //     @abstract       Various constants related to the AudioClockDevice class.
@@ -745,10 +744,10 @@
 // {
 //     kAudioClockDeviceClassID    = 'aclk'
 // };
-    
+
 //     //==================================================================================================
 // #pragma mark AudioClockDevice Properties
-    
+
 // /*!
 //     @enum           AudioClockDevice Properties
 //     @abstract       AudioObjectPropertySelector values provided by the AudioClockDevice class.
@@ -961,7 +960,7 @@
 //                         The AudioStreamBasicDescription that describes the format of the stream.
 //                         Note that the mSampleRate field of the structure will be the same as the
 //                         the values in mSampleRateRange when only a single sample rate is supported.
-//                         It will be kAudioStreamAnyRate when there is a range with more elements. 
+//                         It will be kAudioStreamAnyRate when there is a range with more elements.
 //     @field          mSampleRateRange
 //                         The AudioValueRange that describes the minimum and maximum sample rate for
 //                         the stream. If the mSampleRate field of mFormat is kAudioStreamAnyRate the
@@ -1263,12 +1262,12 @@
 //                         or the current IO session stops and a new IO session starts.
 //     @constant       kAudioTalkbackControlClassID
 //                         An AudioBooleanControl where true means that the talkback channel is
-//                         enabled. This control is for talkback channels that are handled outside of 
+//                         enabled. This control is for talkback channels that are handled outside of
 //                         the regular IO channels. If the talkback channel is among the normal IO
 //                         channels, it will use AudioMuteControl.
 //     @constant       kAudioListenbackControlClassID
 //                         An AudioBooleanControl where true means that the listenback channel is
-//                         audible. This control is for listenback channels that are handled outside of 
+//                         audible. This control is for listenback channels that are handled outside of
 //                         the regular IO channels. If the listenback channel is among the normal IO
 //                         channels, it will use AudioMuteControl.
 // */
@@ -1365,7 +1364,7 @@
 // };
 
 // /*!
-//     @enum           Constants for the value of the property, kAudioSelectorControlPropertyItemKind 
+//     @enum           Constants for the value of the property, kAudioSelectorControlPropertyItemKind
 //                     for any selector control item
 //     @constant       kAudioSelectorControlItemKindSpacer
 //                         This ID represents an item in a selector control's range that represents a

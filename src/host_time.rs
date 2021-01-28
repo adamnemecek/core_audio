@@ -21,7 +21,6 @@
 //     This collection of functions provides access to the host's time base. It also provides
 //     discriptive information about the time base and translations to and from nanoseconds.
 // */
-
 // //==================================================================================================
 // #pragma mark -
 // #pragma mark Includes
@@ -43,7 +42,6 @@
 // /*!
 //     @functiongroup  HostTime
 // */
-
 // /*!
 //     @function       AudioGetCurrentHostTime
 //     @abstract       Gets the current host time.

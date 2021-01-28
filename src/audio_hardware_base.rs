@@ -1,3 +1,4 @@
+use core_audio_types::prelude::*;
 // /*==================================================================================================
 //      File:       CoreAudio/AudioHardwareBase.h
 
@@ -44,14 +45,18 @@
 //     @abstract       A UInt32 that provides a handle on a specific AudioObject.
 // */
 // typedef UInt32  AudioObjectID;
-pub type AudioObjectID = u32;
+#[repr(C)]
+#[derive(Clone, Copy, PartialEq, Eq)]
+pub struct AudioObjectID(u32);
 
 // /*!
 //     @typedef        AudioClassID
 //     @abstract       AudioClassIDs are used to identify the class of an AudioObject.
 // */
 // typedef UInt32  AudioClassID;
-pub type AudioClassID = u32;
+#[repr(C)]
+#[derive(Clone, Copy, PartialEq, Eq)]
+pub struct AudioClassID(u32);
 
 // /*!
 //     @typedef        AudioObjectPropertySelector
@@ -64,7 +69,9 @@ pub type AudioClassID = u32;
 //                     it may not implement them all.
 // */
 // typedef UInt32  AudioObjectPropertySelector;
-pub type AudioObjectPropertySelector = u32;
+#[repr(C)]
+#[derive(Clone, Copy, PartialEq, Eq)]
+pub struct AudioObjectPropertySelector(u32);
 
 // /*!
 //     @typedef        AudioObjectPropertyScope
@@ -76,7 +83,9 @@ pub type AudioObjectPropertySelector = u32;
 //                     scopes. A subclass inherits its superclass's set of scopes.
 // */
 // typedef UInt32  AudioObjectPropertyScope;
-pub type AudioObjectPropertyScope = u32;
+#[repr(C)]
+#[derive(Clone, Copy, PartialEq, Eq)]
+pub struct AudioObjectPropertyScope(u32);
 
 // /*!
 //     @typedef        AudioObjectPropertyElement
@@ -90,7 +99,9 @@ pub type AudioObjectPropertyScope = u32;
 //                     same scope. There is no inheritance of elements.
 // */
 // typedef UInt32  AudioObjectPropertyElement;
-pub type AudioObjectPropertyElement = u32;
+#[repr(C)]
+#[derive(Clone, Copy, PartialEq, Eq)]
+pub struct AudioObjectPropertyElement(u32);
 
 // /*!
 //     @struct         AudioObjectPropertyAddress
@@ -985,6 +996,10 @@ pub struct AudioObjectPropertyAddress {
 //     AudioValueRange                 mSampleRateRange;
 // };
 // typedef struct AudioStreamRangedDescription AudioStreamRangedDescription;
+pub struct AudioStreamRangedDescription {
+    pub m_format: AudioStreamBasicDescription,
+    pub m_sample_rate_range: AudioValueRange,
+}
 
 // //==================================================================================================
 // #pragma mark AudioStream Constants

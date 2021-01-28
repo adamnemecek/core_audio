@@ -1,5 +1,6 @@
 use crate::prelude::*;
 use cc4::four_cc;
+use core_audio_types::prelude::*;
 // /*==================================================================================================
 //      File:       CoreAudio/AudioServerPlugIn.h
 
@@ -248,8 +249,7 @@ pub struct AudioServerPlugInCustomPropertyInfo {
 //     Float64         mDeviceHostTicksPerFrame;
 // };
 // typedef struct AudioServerPlugInIOCycleInfo AudioServerPlugInIOCycleInfo;
-#[derive(Clone, Copy, PartialEq, Eq)]
-pub struct AudioTimeStamp {}
+
 #[repr(C)]
 #[derive(Clone, Copy, PartialEq)]
 pub struct AudioServerPlugInIOCycleInfo {

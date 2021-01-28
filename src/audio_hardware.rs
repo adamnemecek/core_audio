@@ -1,6 +1,6 @@
 use crate::prelude::*;
-use core_audio_types::prelude::*;
 use cc4::four_cc;
+use core_audio_types::prelude::*;
 
 #[repr(u32)]
 
@@ -172,7 +172,8 @@ pub type AudioObjectPropertyListenerProc =
 // typedef void
 // (^AudioObjectPropertyListenerBlock)(    UInt32                              inNumberAddresses,
 //                                         const AudioObjectPropertyAddress*   inAddresses);
-pub type AudioObjectPropertyListenerBlock = block::RcBlock<(u32, *const AudioObjectPropertyAddress), ()>;
+pub type AudioObjectPropertyListenerBlock =
+    block::RcBlock<(u32, *const AudioObjectPropertyAddress), ()>;
 // //==================================================================================================
 // #pragma mark AudioObject Properties
 
@@ -203,9 +204,9 @@ pub type AudioObjectPropertyListenerBlock = block::RcBlock<(u32, *const AudioObj
 // };
 
 impl AudioObjectPropertySelector {
-    pub const Creator: Self             = Self::new(b"oplg");
-    pub const ListenerAdded: Self       = Self::new(b"lisa");
-    pub const ListenerRemoved: Self     = Self::new(b"lisr");
+    pub const Creator: Self = Self::new(b"oplg");
+    pub const ListenerAdded: Self = Self::new(b"lisa");
+    pub const ListenerRemoved: Self = Self::new(b"lisr");
 }
 
 // //==================================================================================================
@@ -652,8 +653,6 @@ extern "C" {
 //     kAudioHardwarePropertyPowerHint                             = 'powh'
 // };
 
-
-
 impl AudioObjectPropertySelector {
     pub const Devices: Self = Self::new(b"dev#");
     pub const DefaultInputDevice: Self = Self::new(b"dIn ");
@@ -836,6 +835,8 @@ impl AudioObjectPropertySelector {
 //                         const AudioTimeStamp*   inOutputTime,
 //                         void* __nullable        inClientData);
 
+pub type AudioDeviceIOProc = fn(AudioObjectID, *const AudioTimeStamp) -> !;
+
 // /*!
 //     @typedef        AudioDeviceIOBlock
 //     @abstract       An AudioDeviceIOBlock is called by an AudioDevice to provide input data read
@@ -879,6 +880,7 @@ impl AudioObjectPropertySelector {
 //                         AudioBufferList*        outOutputData,
 //                         const AudioTimeStamp*   inOutputTime);
 
+pub type AudioDeviceIOBlock = block::RcBlock<(), ()>;
 // /*!
 //     @typedef        AudioDeviceIOProcID
 //     @abstract       An AudioDeviceIOProcID represents both an IOProc and the client data that goes
@@ -909,6 +911,20 @@ impl AudioObjectPropertySelector {
 //     UInt32  mStreamIsOn[1];
 // };
 // typedef struct AudioHardwareIOProcStreamUsage   AudioHardwareIOProcStreamUsage;
+#[repr(C)]
+pub struct AudioHardwareIOProcStreamUsage {
+    pub m_io_proc: *const std::ffi::c_void,
+    pub m_number_streams: u32,
+    pub m_stream_is_on: [u32; 1],
+}
+
+impl AudioHardwareIOProcStreamUsage {
+    pub fn stream_on_slice(&self) -> &[u32] {
+        unsafe {
+            std::slice::from_raw_parts(self.m_stream_is_on.as_ptr(), self.m_number_streams as _)
+        }
+    }
+}
 
 // //==================================================================================================
 // #pragma mark AudioDevice Constants

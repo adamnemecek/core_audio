@@ -184,6 +184,23 @@ pub struct AudioObjectPropertyAddress {
 //     kAudioDevicePermissionsError            = '!hog'
 // };
 
+use cc4::four_cc;
+#[repr(u32)]
+pub enum OSStatus {
+    HardwareNoError = 0,
+    HardwareNotRunningError = four_cc(b"stop"),
+    HardwareUnspecifiedError = four_cc(b"what"),
+    HardwareUnknownPropertyError = four_cc(b"who?"),
+    HardwareBadPropertySizeError = four_cc(b"!siz"),
+    HardwareIllegalOperationError = four_cc(b"nope"),
+    HardwareBadObjectError = four_cc(b"!obj"),
+    HardwareBadDeviceError = four_cc(b"!dev"),
+    HardwareBadStreamError = four_cc(b"!str"),
+    HardwareUnsupportedOperationError = four_cc(b"unop"),
+    DeviceUnsupportedFormatError = four_cc(b"!dat"),
+    DevicePermissionsError = four_cc(b"!hog"),
+}
+
 // /*!
 //     @enum           Predefined AudioObjectID values
 //     @abstract       ObjectIDs that are always the same
@@ -222,6 +239,14 @@ pub struct AudioObjectPropertyAddress {
 //     kAudioObjectPropertyScopePlayThrough    = 'ptru',
 //     kAudioObjectPropertyElementMaster       = 0
 // };
+
+impl AudioObjectPropertyScope {
+    pub const ScopeGlobal: Self = Self(four_cc(b"glob"));
+    pub const ScopeInput: Self = Self(four_cc(b"inpt"));
+    pub const ScopeOutput: Self = Self(four_cc(b"outp"));
+    pub const ScopePlayThrough: Self = Self(four_cc(b"ptru"));
+    pub const ElementMaster: Self = Self(0);
+}
 
 // /*!
 //     @enum           Wildcard Constants

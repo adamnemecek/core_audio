@@ -501,6 +501,7 @@ pub enum AudioDeviceClockAlgorithmSelector {
 // */
 // struct  AudioServerPlugInHostInterface
 // {
+#[repr(C)]
 pub struct AudioServerPlugInHostInterface {
     // #pragma mark Property Operations
 
@@ -524,7 +525,8 @@ pub struct AudioServerPlugInHostInterface {
     //                             AudioObjectID                       inObjectID,
     //                             UInt32                              inNumberAddresses,
     //                             const AudioObjectPropertyAddress*   inAddresses);
-    PropertiesChanged: fn(&Self, AudioObjectID, u32, *const AudioObjectPropertyAddress) -> OSStatus,
+    pub properties_changed:
+        fn(&Self, AudioObjectID, u32, *const AudioObjectPropertyAddress) -> OSStatus,
     // #pragma mark Storage Operations
 
     //     /*!

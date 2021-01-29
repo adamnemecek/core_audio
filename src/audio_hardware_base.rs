@@ -93,6 +93,12 @@ impl AudioObjectPropertySelector {
 #[derive(Clone, Copy, PartialEq, Eq)]
 pub struct AudioObjectPropertyScope(u32);
 
+impl AudioObjectPropertyScope {
+    pub const fn new(cc: &[u8; 4]) -> Self {
+        Self(four_cc(cc))
+    }
+}
+
 // /*!
 //     @typedef        AudioObjectPropertyElement
 //     @abstract       An AudioObjectPropertyElement is an integer that identifies, along with the
@@ -208,6 +214,12 @@ pub enum OSStatus {
     DevicePermissionsError = four_cc(b"!hog"),
 }
 
+impl Default for OSStatus {
+    fn default() -> Self {
+        Self::HardwareNoError
+    }
+}
+
 // /*!
 //     @enum           Predefined AudioObjectID values
 //     @abstract       ObjectIDs that are always the same
@@ -248,10 +260,10 @@ pub enum OSStatus {
 // };
 
 impl AudioObjectPropertyScope {
-    pub const ScopeGlobal: Self = Self(four_cc(b"glob"));
-    pub const ScopeInput: Self = Self(four_cc(b"inpt"));
-    pub const ScopeOutput: Self = Self(four_cc(b"outp"));
-    pub const ScopePlayThrough: Self = Self(four_cc(b"ptru"));
+    pub const ScopeGlobal: Self = Self::new(b"glob");
+    pub const ScopeInput: Self = Self::new(b"inpt");
+    pub const ScopeOutput: Self = Self::new(b"outp");
+    pub const ScopePlayThrough: Self = Self::new(b"ptru");
     pub const ElementMaster: Self = Self(0);
 }
 
@@ -387,8 +399,22 @@ impl AudioObjectPropertyScope {
 //     kAudioObjectPropertyOwnedObjects        = 'ownd',
 //     kAudioObjectPropertyIdentify            = 'iden',
 //     kAudioObjectPropertySerialNumber        = 'snum',
-//     kAudioObjectPropertyFirmwareVersion     = 'fwvn'
-// };
+//
+
+impl AudioObjectPropertySelector {
+    pub const BaseClass: Self = Self::new(b"bcls");
+    pub const Class: Self = Self::new(b"clas");
+    pub const Owner: Self = Self::new(b"stdv");
+    pub const Name: Self = Self::new(b"lnam");
+    pub const ModelName: Self = Self::new(b"lmod");
+    pub const Manufacturer: Self = Self::new(b"lmak");
+    pub const ElementName: Self = Self::new(b"lchn");
+    pub const ElementCategoryName: Self = Self::new(b"lccn");
+    pub const ElementNumberName: Self = Self::new(b"lcnn");
+    pub const OwnedObjects: Self = Self::new(b"ownd");
+    pub const Identify: Self = Self::new(b"iden");
+    pub const SerialNumber: Self = Self::new(b"snum");
+}
 
 // //==================================================================================================
 // #pragma mark -
@@ -457,6 +483,16 @@ impl AudioObjectPropertyScope {
 //     kAudioPlugInPropertyClockDeviceList           = 'clk#',
 //     kAudioPlugInPropertyTranslateUIDToClockDevice = 'uidc'
 // };
+
+// impl AudioObjectPropertySelector {
+//     pub const BundleID: Self = Self::new(b"piid");
+//     pub const DeviceList: Self = Self::new(b"dev#");
+//     pub const TranslateUIDToDevice: Self = Self::new(b"uidd");
+//     pub const BoxList: Self = Self::new(b"box#");
+//     pub const TranslateUIDToBox: Self = Self::new(b"uidb");
+//     pub const ClockDeviceList: Self = Self::new(b"clk#");
+//     pub const TranslateUIDToClockDevice: Self = Self::new(b"uidc");
+// }
 
 // //==================================================================================================
 // #pragma mark -

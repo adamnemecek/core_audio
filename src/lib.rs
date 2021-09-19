@@ -1,4 +1,7 @@
 #![feature(const_raw_ptr_deref)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+
 
 pub mod prelude;
 

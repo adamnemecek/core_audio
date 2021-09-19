@@ -623,6 +623,14 @@ impl AudioObjectPropertySelector {
 //     kAudioBoxPropertyClockDeviceList    = 'bcl#'
 // };
 
+// pub const BundleID: Self                  = Self::new(b"piid");
+// pub const DeviceList: Self                = Self::new(b"dev#");
+// pub const TranslateUIDToDevice: Self      = Self::new(b"uidd");
+// pub const BoxList: Self                   = Self::new(b"box#");
+// pub const TranslateUIDToBox: Self         = Self::new(b"uidb");
+// pub const ClockDeviceList: Self           = Self::new(b"clk#");
+// pub const TranslateUIDToClockDevice: Self = Self::new(b"uidc");
+
 // //==================================================================================================
 // #pragma mark -
 // #pragma mark AudioDevice Constants

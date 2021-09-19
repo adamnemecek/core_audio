@@ -1,4 +1,3 @@
-#![feature(const_fn)]
 #![feature(const_raw_ptr_deref)]
 
 pub mod prelude;

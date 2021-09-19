@@ -260,11 +260,11 @@ impl Default for OSStatus {
 // };
 
 impl AudioObjectPropertyScope {
-    pub const ScopeGlobal: Self = Self::new(b"glob");
-    pub const ScopeInput: Self = Self::new(b"inpt");
-    pub const ScopeOutput: Self = Self::new(b"outp");
-    pub const ScopePlayThrough: Self = Self::new(b"ptru");
-    pub const ElementMaster: Self = Self(0);
+    pub const SCOPE_GLOBAL: Self = Self::new(b"glob");
+    pub const SCOPE_INPUT: Self = Self::new(b"inpt");
+    pub const SCOPE_OUTPUT: Self = Self::new(b"outp");
+    pub const SCOPE_PLAY_THROUGH: Self = Self::new(b"ptru");
+    pub const ELEMENT_MASTER: Self = Self(0);
 }
 
 // /*!
@@ -402,18 +402,18 @@ impl AudioObjectPropertyScope {
 //
 
 impl AudioObjectPropertySelector {
-    pub const BaseClass: Self = Self::new(b"bcls");
-    pub const Class: Self = Self::new(b"clas");
-    pub const Owner: Self = Self::new(b"stdv");
-    pub const Name: Self = Self::new(b"lnam");
-    pub const ModelName: Self = Self::new(b"lmod");
-    pub const Manufacturer: Self = Self::new(b"lmak");
-    pub const ElementName: Self = Self::new(b"lchn");
-    pub const ElementCategoryName: Self = Self::new(b"lccn");
-    pub const ElementNumberName: Self = Self::new(b"lcnn");
-    pub const OwnedObjects: Self = Self::new(b"ownd");
-    pub const Identify: Self = Self::new(b"iden");
-    pub const SerialNumber: Self = Self::new(b"snum");
+    pub const BASE_CLASS: Self = Self::new(b"bcls");
+    pub const CLASS: Self = Self::new(b"clas");
+    pub const OWNER: Self = Self::new(b"stdv");
+    pub const NAME: Self = Self::new(b"lnam");
+    pub const MODEL_NAME: Self = Self::new(b"lmod");
+    pub const MANUFACTURER: Self = Self::new(b"lmak");
+    pub const ELEMENT_NAME: Self = Self::new(b"lchn");
+    pub const ELEMENT_CATEGORY_NAME: Self = Self::new(b"lccn");
+    pub const ELEMENT_NUMBER_NAME: Self = Self::new(b"lcnn");
+    pub const OWNED_OBJECTS: Self = Self::new(b"ownd");
+    pub const IDENTIFY: Self = Self::new(b"iden");
+    pub const SERIAL_NUMBER: Self = Self::new(b"snum");
 }
 
 // //==================================================================================================

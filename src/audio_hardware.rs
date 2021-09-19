@@ -1,5 +1,5 @@
 use crate::prelude::*;
-use cc4::four_cc;
+// use cc4::four_cc;
 use core_audio_types::prelude::*;
 
 #[repr(u32)]
@@ -204,9 +204,9 @@ pub type AudioObjectPropertyListenerBlock =
 // };
 
 impl AudioObjectPropertySelector {
-    pub const Creator: Self = Self::new(b"oplg");
-    pub const ListenerAdded: Self = Self::new(b"lisa");
-    pub const ListenerRemoved: Self = Self::new(b"lisr");
+    pub const CREATOR: Self = Self::new(b"oplg");
+    pub const LISTENER_ADDED: Self = Self::new(b"lisa");
+    pub const LISTENER_REMOVED: Self = Self::new(b"lisr");
 }
 
 // //==================================================================================================
@@ -654,30 +654,30 @@ extern "C" {
 // };
 
 impl AudioObjectPropertySelector {
-    pub const Devices: Self = Self::new(b"dev#");
-    pub const DefaultInputDevice: Self = Self::new(b"dIn ");
-    pub const DefaultOutputDevice: Self = Self::new(b"dOut");
-    pub const DefaultSystemOutputDevice: Self = Self::new(b"sOut");
-    pub const TranslateUIDToDevice: Self = Self::new(b"uidd");
-    pub const MixStereoToMono: Self = Self::new(b"stmo");
-    pub const PlugInList: Self = Self::new(b"plg#");
-    pub const TranslateBundleIDToPlugIn: Self = Self::new(b"bidp");
-    pub const TransportManagerList: Self = Self::new(b"tmg#");
-    pub const TranslateBundleIDToTransportManager: Self = Self::new(b"tmbi");
-    pub const BoxList: Self = Self::new(b"box#");
-    pub const TranslateUIDToBox: Self = Self::new(b"uidb");
-    pub const ClockDeviceList: Self = Self::new(b"clk#");
-    pub const TranslateUIDToClockDevice: Self = Self::new(b"uidc");
-    pub const ProcessIsMaster: Self = Self::new(b"mast");
-    pub const IsInitingOrExiting: Self = Self::new(b"inot");
-    pub const UserIDChanged: Self = Self::new(b"euid");
-    pub const ProcessIsAudible: Self = Self::new(b"pmut");
-    pub const SleepingIsAllowed: Self = Self::new(b"slep");
-    pub const UnloadingIsAllowed: Self = Self::new(b"unld");
-    pub const HogModeIsAllowed: Self = Self::new(b"hogr");
-    pub const UserSessionIsActiveOrHeadless: Self = Self::new(b"user");
-    pub const ServiceRestarted: Self = Self::new(b"srst");
-    pub const PowerHint: Self = Self::new(b"powh");
+    pub const DEVICES: Self = Self::new(b"dev#");
+    pub const DEFAULT_INPUT_DEVICE: Self = Self::new(b"dIn ");
+    pub const DEFAULT_OUTPUT_DEVICE: Self = Self::new(b"dOut");
+    pub const DEFAULT_SYSTEM_OUTPUT_DEVICE: Self = Self::new(b"sOut");
+    pub const TRANSLATE_UID_TO_DEVICE: Self = Self::new(b"uidd");
+    pub const MIX_STEREO_TO_MONO: Self = Self::new(b"stmo");
+    pub const PLUG_IN_LIST: Self = Self::new(b"plg#");
+    pub const TRANSLATE_BUNDLE_ID_TO_PLUG_IN: Self = Self::new(b"bidp");
+    pub const TRANSPORT_MANAGER_LIST: Self = Self::new(b"tmg#");
+    pub const TRANSLATE_BUNDLE_ID_TO_TRANSPORT_MANAGER: Self = Self::new(b"tmbi");
+    pub const BOX_LIST: Self = Self::new(b"box#");
+    pub const TRANSLATE_UID_TO_BOX: Self = Self::new(b"uidb");
+    pub const CLOCK_DEVICE_LIST: Self = Self::new(b"clk#");
+    pub const TRANSLATE_UID_TO_CLOCK_DEVICE: Self = Self::new(b"uidc");
+    pub const PROCESS_IS_MASTER: Self = Self::new(b"mast");
+    pub const IS_INITING_OR_EXITING: Self = Self::new(b"inot");
+    pub const USER_ID_CHANGED: Self = Self::new(b"euid");
+    pub const PROCESS_IS_AUDIBLE: Self = Self::new(b"pmut");
+    pub const SLEEPING_IS_ALLOWED: Self = Self::new(b"slep");
+    pub const UNLOADING_IS_ALLOWED: Self = Self::new(b"unld");
+    pub const HOG_MODE_IS_ALLOWED: Self = Self::new(b"hogr");
+    pub const USER_SESSION_IS_ACTIVE_OR_HEADLESS: Self = Self::new(b"user");
+    pub const SERVICE_RESTARTED: Self = Self::new(b"srst");
+    pub const POWER_HINT: Self = Self::new(b"powh");
 }
 
 // //==================================================================================================
@@ -1069,21 +1069,21 @@ impl AudioHardwareIOProcStreamUsage {
 // };
 
 impl AudioObjectPropertySelector {
-    pub const PlugIn: Self = Self::new(b"plug");
-    pub const DeviceHasChanged: Self = Self::new(b"diff");
-    pub const DeviceIsRunningSomewhere: Self = Self::new(b"gone");
-    pub const ProcessorOverload: Self = Self::new(b"over");
-    pub const IOStoppedAbnormally: Self = Self::new(b"stpd");
-    pub const HogMode: Self = Self::new(b"oink");
-    pub const BufferFrameSize: Self = Self::new(b"fsiz");
-    pub const BufferFrameSizeRange: Self = Self::new(b"fsz#");
-    pub const UsesVariableBufferFrameSizes: Self = Self::new(b"vfsz");
-    pub const IOCycleUsage: Self = Self::new(b"ncyc");
-    pub const StreamConfiguration: Self = Self::new(b"slay");
-    pub const IOProcStreamUsage: Self = Self::new(b"suse");
-    pub const ActualSampleRate: Self = Self::new(b"asrt");
-    pub const ClockDevice: Self = Self::new(b"apcd");
-    pub const IOThreadOSWorkgroup: Self = Self::new(b"oswg");
+    pub const PLUG_IN: Self = Self::new(b"plug");
+    pub const DEVICE_HAS_CHANGED: Self = Self::new(b"diff");
+    pub const DEVICE_IS_RUNNING_SOMEWHERE: Self = Self::new(b"gone");
+    pub const PROCESSOR_OVERLOAD: Self = Self::new(b"over");
+    pub const IO_STOPPED_ABNORMALLY: Self = Self::new(b"stpd");
+    pub const HOG_MODE: Self = Self::new(b"oink");
+    pub const BUFFER_FRAME_SIZE: Self = Self::new(b"fsiz");
+    pub const BUFFER_FRAME_SIZE_RANGE: Self = Self::new(b"fsz#");
+    pub const USES_VARIABLE_BUFFER_FRAME_SIZES: Self = Self::new(b"vfsz");
+    pub const IO_CYCLE_USAGE: Self = Self::new(b"ncyc");
+    pub const STREAM_CONFIGURATION: Self = Self::new(b"slay");
+    pub const IO_PROC_STREAM_USAGE: Self = Self::new(b"suse");
+    pub const ACTUAL_SAMPLE_RATE: Self = Self::new(b"asrt");
+    pub const CLOCK_DEVICE: Self = Self::new(b"apcd");
+    pub const IO_THREAD_OS_WORKGROUP: Self = Self::new(b"oswg");
 }
 
 // /*!
@@ -1400,53 +1400,53 @@ impl AudioObjectPropertySelector {
 // };
 
 impl AudioObjectPropertySelector {
-    pub const JackIsConnected: Self = Self::new(b"jack");
-    pub const VolumeScalar: Self = Self::new(b"volm");
-    pub const VolumeDecibels: Self = Self::new(b"vold");
-    pub const VolumeRangeDecibels: Self = Self::new(b"vdb#");
-    pub const VolumeScalarToDecibels: Self = Self::new(b"v2db");
-    pub const VolumeDecibelsToScalar: Self = Self::new(b"db2v");
-    pub const StereoPan: Self = Self::new(b"span");
-    pub const StereoPanChannels: Self = Self::new(b"spn#");
-    pub const Mute: Self = Self::new(b"mute");
-    pub const Solo: Self = Self::new(b"solo");
-    pub const PhantomPower: Self = Self::new(b"phan");
-    pub const PhaseInvert: Self = Self::new(b"phsi");
-    pub const ClipLight: Self = Self::new(b"clip");
-    pub const Talkback: Self = Self::new(b"talb");
-    pub const Listenback: Self = Self::new(b"lsnb");
-    pub const DataSource: Self = Self::new(b"ssrc");
-    pub const DataSources: Self = Self::new(b"ssc#");
-    pub const DataSourceNameForIDCFString: Self = Self::new(b"lscn");
-    pub const DataSourceKindForID: Self = Self::new(b"ssck");
-    pub const ClockSource: Self = Self::new(b"csrc");
-    pub const ClockSources: Self = Self::new(b"csc#");
-    pub const ClockSourceNameForIDCFString: Self = Self::new(b"lcsn");
-    pub const ClockSourceKindForID: Self = Self::new(b"csck");
-    pub const PlayThru: Self = Self::new(b"thru");
-    pub const PlayThruSolo: Self = Self::new(b"thrs");
-    pub const PlayThruVolumeScalar: Self = Self::new(b"mvsc");
-    pub const PlayThruVolumeDecibels: Self = Self::new(b"mvdb");
-    pub const PlayThruVolumeRangeDecibels: Self = Self::new(b"mvd#");
-    pub const PlayThruVolumeScalarToDecibels: Self = Self::new(b"mv2d");
-    pub const PlayThruVolumeDecibelsToScalar: Self = Self::new(b"mv2s");
-    pub const PlayThruStereoPan: Self = Self::new(b"mspn");
-    pub const PlayThruStereoPanChannels: Self = Self::new(b"msp#");
-    pub const PlayThruDestination: Self = Self::new(b"mdds");
-    pub const PlayThruDestinations: Self = Self::new(b"mdd#");
-    pub const PlayThruDestinationNameForIDCFString: Self = Self::new(b"mddc");
-    pub const ChannelNominalLineLevel: Self = Self::new(b"nlvl");
-    pub const ChannelNominalLineLevels: Self = Self::new(b"nlv#");
-    pub const ChannelNominalLineLevelNameForIDCFString: Self = Self::new(b"lcnl");
-    pub const HighPassFilterSetting: Self = Self::new(b"hipf");
-    pub const HighPassFilterSettings: Self = Self::new(b"hip#");
-    pub const HighPassFilterSettingNameForIDCFString: Self = Self::new(b"hipl");
-    pub const SubVolumeScalar: Self = Self::new(b"svlm");
-    pub const SubVolumeDecibels: Self = Self::new(b"svld");
-    pub const SubVolumeRangeDecibels: Self = Self::new(b"svd#");
-    pub const SubVolumeScalarToDecibels: Self = Self::new(b"sv2d");
-    pub const SubVolumeDecibelsToScalar: Self = Self::new(b"sd2v");
-    pub const SubMute: Self = Self::new(b"smut");
+    pub const JACK_IS_CONNECTED: Self = Self::new(b"jack");
+    pub const VOLUME_SCALAR: Self = Self::new(b"volm");
+    pub const VOLUME_DECIBELS: Self = Self::new(b"vold");
+    pub const VOLUME_RANGE_DECIBELS: Self = Self::new(b"vdb#");
+    pub const VOLUME_SCALAR_TO_DECIBELS: Self = Self::new(b"v2db");
+    pub const VOLUME_DECIBELS_TO_SCALAR: Self = Self::new(b"db2v");
+    pub const STEREO_PAN: Self = Self::new(b"span");
+    pub const STEREO_PAN_CHANNELS: Self = Self::new(b"spn#");
+    pub const MUTE: Self = Self::new(b"mute");
+    pub const SOLO: Self = Self::new(b"solo");
+    pub const PHANTOM_POWER: Self = Self::new(b"phan");
+    pub const PHASE_INVERT: Self = Self::new(b"phsi");
+    pub const CLIP_LIGHT: Self = Self::new(b"clip");
+    pub const TALKBACK: Self = Self::new(b"talb");
+    pub const LISTENBACK: Self = Self::new(b"lsnb");
+    pub const DATA_SOURCE: Self = Self::new(b"ssrc");
+    pub const DATA_SOURCES: Self = Self::new(b"ssc#");
+    pub const DATA_SOURCE_NAME_FOR_IDCF_STRING: Self = Self::new(b"lscn");
+    pub const DATA_SOURCE_KIND_FOR_ID: Self = Self::new(b"ssck");
+    pub const CLOCK_SOURCE: Self = Self::new(b"csrc");
+    pub const CLOCK_SOURCES: Self = Self::new(b"csc#");
+    pub const CLOCK_SOURCE_NAME_FOR_IDCF_STRING: Self = Self::new(b"lcsn");
+    pub const CLOCK_SOURCE_KIND_FOR_ID: Self = Self::new(b"csck");
+    pub const PLAY_THRU: Self = Self::new(b"thru");
+    pub const PLAY_THRU_SOLO: Self = Self::new(b"thrs");
+    pub const PLAY_THRU_VOLUME_SCALAR: Self = Self::new(b"mvsc");
+    pub const PLAY_THRU_VOLUME_DECIBELS: Self = Self::new(b"mvdb");
+    pub const PLAY_THRU_VOLUME_RANGE_DECIBELS: Self = Self::new(b"mvd#");
+    pub const PLAY_THRU_VOLUME_SCALAR_TO_DECIBELS: Self = Self::new(b"mv2d");
+    pub const PLAY_THRU_VOLUME_DECIBELS_TO_SCALAR: Self = Self::new(b"mv2s");
+    pub const PLAY_THRU_STEREO_PAN: Self = Self::new(b"mspn");
+    pub const PLAY_THRU_STEREO_PAN_CHANNELS: Self = Self::new(b"msp#");
+    pub const PLAY_THRU_DESTINATION: Self = Self::new(b"mdds");
+    pub const PLAY_THRU_DESTINATIONS: Self = Self::new(b"mdd#");
+    pub const PLAY_THRU_DESTINATION_NAME_FOR_IDCF_STRING: Self = Self::new(b"mddc");
+    pub const CHANNEL_NOMINAL_LINE_LEVEL: Self = Self::new(b"nlvl");
+    pub const CHANNEL_NOMINAL_LINE_LEVELS: Self = Self::new(b"nlv#");
+    pub const CHANNEL_NOMINAL_LINE_LEVEL_NAME_FOR_IDCF_STRING: Self = Self::new(b"lcnl");
+    pub const HIGH_PASS_FILTER_SETTING: Self = Self::new(b"hipf");
+    pub const HIGH_PASS_FILTER_SETTINGS: Self = Self::new(b"hip#");
+    pub const HIGH_PASS_FILTER_SETTING_NAME_FOR_IDCF_STRING: Self = Self::new(b"hipl");
+    pub const SUB_VOLUME_SCALAR: Self = Self::new(b"svlm");
+    pub const SUB_VOLUME_DECIBELS: Self = Self::new(b"svld");
+    pub const SUB_VOLUME_RANGE_DECIBELS: Self = Self::new(b"svd#");
+    pub const SUB_VOLUME_SCALAR_TO_DECIBELS: Self = Self::new(b"sv2d");
+    pub const SUB_VOLUME_DECIBELS_TO_SCALAR: Self = Self::new(b"sd2v");
+    pub const SUB_MUTE: Self = Self::new(b"smut");
 }
 
 // //==================================================================================================
